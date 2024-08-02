@@ -14,7 +14,7 @@ class ApiService {
     final either = await HttpService().get(url);
 
     return either.fold(
-      (failure) => Left(failure),
+      Left.new,
       (response) {
         try {
           final responseList = response as List<dynamic>;

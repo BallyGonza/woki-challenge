@@ -14,16 +14,43 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Woki App'),
       ),
-      body: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-            orElse: () => const Center(child: CircularProgressIndicator()),
-            loaded: (users) => UserList(users: users),
-            error: (errorMessage) => Center(
-              child: Text(errorMessage),
+      body: RefreshIndicator(
+        color: Colors.blue,
+        onRefresh: () async =>
+            context.read<UserBloc>().add(const UserEvent.getUsers()),
+        child: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+              orElse: () => const Center(child: CircularProgressIndicator()),
+              loaded: (users, isCached) => UserList(
+                users: users,
+                isCached: isCached,
+              ),
+              error: (errorMessage) => _buildErrorWidget(context, errorMessage),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildErrorWidget(BuildContext context, String errorMessage) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(errorMessage),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.5,
+            child: CustomElevatedButton(
+              color: Theme.of(context).colorScheme.error,
+              onPressed: () =>
+                  context.read<UserBloc>().add(const UserEvent.getUsers()),
+              text: 'Reintentar',
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

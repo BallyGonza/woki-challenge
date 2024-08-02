@@ -20,7 +20,7 @@ mixin _$UserState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> users) loaded,
+    required TResult Function(List<User> users, bool isCached) loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$UserState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<User> users)? loaded,
+    TResult? Function(List<User> users, bool isCached)? loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$UserState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> users)? loaded,
+    TResult Function(List<User> users, bool isCached)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -125,7 +125,7 @@ class _$UserInitialStateImpl implements UserInitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> users) loaded,
+    required TResult Function(List<User> users, bool isCached) loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -136,7 +136,7 @@ class _$UserInitialStateImpl implements UserInitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<User> users)? loaded,
+    TResult? Function(List<User> users, bool isCached)? loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -147,7 +147,7 @@ class _$UserInitialStateImpl implements UserInitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> users)? loaded,
+    TResult Function(List<User> users, bool isCached)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -239,7 +239,7 @@ class _$UserLoadingStateImpl implements UserLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> users) loaded,
+    required TResult Function(List<User> users, bool isCached) loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -250,7 +250,7 @@ class _$UserLoadingStateImpl implements UserLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<User> users)? loaded,
+    TResult? Function(List<User> users, bool isCached)? loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -261,7 +261,7 @@ class _$UserLoadingStateImpl implements UserLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> users)? loaded,
+    TResult Function(List<User> users, bool isCached)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -319,7 +319,7 @@ abstract class _$$UserLoadedStateImplCopyWith<$Res> {
           $Res Function(_$UserLoadedStateImpl) then) =
       __$$UserLoadedStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<User> users});
+  $Res call({List<User> users, bool isCached});
 }
 
 /// @nodoc
@@ -334,12 +334,17 @@ class __$$UserLoadedStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? users = null,
+    Object? isCached = null,
   }) {
     return _then(_$UserLoadedStateImpl(
       users: null == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
               as List<User>,
+      isCached: null == isCached
+          ? _value.isCached
+          : isCached // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -347,7 +352,8 @@ class __$$UserLoadedStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UserLoadedStateImpl implements UserLoadedState {
-  const _$UserLoadedStateImpl({required final List<User> users})
+  const _$UserLoadedStateImpl(
+      {required final List<User> users, required this.isCached})
       : _users = users;
 
   final List<User> _users;
@@ -359,8 +365,11 @@ class _$UserLoadedStateImpl implements UserLoadedState {
   }
 
   @override
+  final bool isCached;
+
+  @override
   String toString() {
-    return 'UserState.loaded(users: $users)';
+    return 'UserState.loaded(users: $users, isCached: $isCached)';
   }
 
   @override
@@ -368,12 +377,14 @@ class _$UserLoadedStateImpl implements UserLoadedState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserLoadedStateImpl &&
-            const DeepCollectionEquality().equals(other._users, _users));
+            const DeepCollectionEquality().equals(other._users, _users) &&
+            (identical(other.isCached, isCached) ||
+                other.isCached == isCached));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_users));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_users), isCached);
 
   @JsonKey(ignore: true)
   @override
@@ -387,10 +398,10 @@ class _$UserLoadedStateImpl implements UserLoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> users) loaded,
+    required TResult Function(List<User> users, bool isCached) loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(users);
+    return loaded(users, isCached);
   }
 
   @override
@@ -398,10 +409,10 @@ class _$UserLoadedStateImpl implements UserLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<User> users)? loaded,
+    TResult? Function(List<User> users, bool isCached)? loaded,
     TResult? Function(String message)? error,
   }) {
-    return loaded?.call(users);
+    return loaded?.call(users, isCached);
   }
 
   @override
@@ -409,12 +420,12 @@ class _$UserLoadedStateImpl implements UserLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> users)? loaded,
+    TResult Function(List<User> users, bool isCached)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(users);
+      return loaded(users, isCached);
     }
     return orElse();
   }
@@ -458,10 +469,12 @@ class _$UserLoadedStateImpl implements UserLoadedState {
 }
 
 abstract class UserLoadedState implements UserState {
-  const factory UserLoadedState({required final List<User> users}) =
-      _$UserLoadedStateImpl;
+  const factory UserLoadedState(
+      {required final List<User> users,
+      required final bool isCached}) = _$UserLoadedStateImpl;
 
   List<User> get users;
+  bool get isCached;
   @JsonKey(ignore: true)
   _$$UserLoadedStateImplCopyWith<_$UserLoadedStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -534,7 +547,7 @@ class _$UserErrorStateImpl implements UserErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<User> users) loaded,
+    required TResult Function(List<User> users, bool isCached) loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -545,7 +558,7 @@ class _$UserErrorStateImpl implements UserErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<User> users)? loaded,
+    TResult? Function(List<User> users, bool isCached)? loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -556,7 +569,7 @@ class _$UserErrorStateImpl implements UserErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<User> users)? loaded,
+    TResult Function(List<User> users, bool isCached)? loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

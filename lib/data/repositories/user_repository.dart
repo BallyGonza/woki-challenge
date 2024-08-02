@@ -1,40 +1,50 @@
 // import 'package:hive/hive.dart';
 import 'package:dartz/dartz.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:woki_app/data/data.dart';
 import 'package:woki_app/services/services.dart';
 
 class UserRepository {
   UserRepository();
 
+  final usersBox = Hive.box<UserHive>('users_box');
+
   Future<Either<String, List<User>>> getUsers() async {
     final either = await ApiService().getUsers();
 
     return either.fold(
-      (failure) => Left(failure),
-      (usersDto) => Right(
-        usersDto.map(User.fromDto).toList(),
-      ),
+      Left.new,
+      (usersDto) {
+        final users = usersDto.map(User.fromDto).toList();
+        saveUsers(users);
+        return Right(users);
+      },
     );
   }
 
-  // final Box<UserModel> box = Hive.box<UserModel>('users_box');
+  Future<Either<String, void>> saveUsers(List<User> users) async {
+    try {
+      await usersBox.clear();
+      final entries = {
+        for (final user in users) user.id: UserHive.fromModel(user),
+      };
+      await usersBox.putAll(entries);
+      return const Right(null);
+    } catch (e) {
+      return Left('Error while saving users: $e');
+    }
+  }
 
-//   // get user from box
-//   Future<UserModel> getUser() async {
-//     if (box.isEmpty) {
-//       await saveUser(defaultUser);
-//       return box.getAt(0)!;
-//     } else {
-//       return box.getAt(0)!;
-//     }
-//   }
+  Future<Either<String, List<User>>> getCachedUsers() async {
+    try {
+      final cachedUsers = usersBox.values.map((e) => e.toModel()).toList();
 
-//   // save user to box
-//   Future<void> saveUser(UserModel user) async {
-//     await box.put(user.id, user);
-//   }
+      if (cachedUsers.isEmpty) {
+        return const Left('No internet connection. No users in cache');
+      }
+      return Right(cachedUsers);
+    } catch (e) {
+      return Left('Error while getting cached users: $e');
+    }
+  }
 }
-
-// UserModel defaultUser = UserModel(
-//   id: 0,
-// );

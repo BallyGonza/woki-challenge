@@ -7,8 +7,8 @@ import 'package:woki_app/services/services.dart';
 import 'package:woki_app/views/views.dart';
 
 Future<void> main() async {
-  // await HiveService.initializeHive();
   WidgetsFlutterBinding.ensureInitialized();
+  await HiveService.initializeHive();
   await SystemChromeService.setSystemChrome();
 
   runApp(const Main());

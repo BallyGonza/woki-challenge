@@ -1,3 +1,6 @@
+// ignore_for_file: cascade_invocations
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:woki_app/blocs/blocs.dart';
 import 'package:woki_app/data/data.dart';
@@ -13,36 +16,35 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   final UserRepository _userRepository;
+  final Connectivity _connectivity = Connectivity();
 
-  Future<void> _onInit(
-    UserInitialEvent event,
-    Emitter<UserState> emit,
-  ) async {
-    emit(const UserState.loading());
-    try {
-      final usersEither = await _userRepository.getUsers();
-      usersEither.fold(
-        (failure) => emit(UserState.error(failure)),
-        (users) => emit(UserState.loaded(users: users)),
-      );
-    } catch (e) {
-      emit(UserState.error(e.toString()));
-    }
+  Future<void> _onInit(UserInitialEvent event, Emitter<UserState> emit) async {
+    await _getUsers(emit);
   }
 
   Future<void> _onGetUsers(
     UserGetUsersEvent event,
     Emitter<UserState> emit,
   ) async {
+    await _getUsers(emit);
+  }
+
+  Future<void> _getUsers(Emitter<UserState> emit) async {
     emit(const UserState.loading());
-    try {
-      final usersEither = await _userRepository.getUsers();
-      usersEither.fold(
-        (failure) => emit(UserState.error(failure)),
-        (users) => emit(UserState.loaded(users: users)),
-      );
-    } catch (e) {
-      emit(UserState.error(e.toString()));
-    }
+
+    final connectivityResult = await _connectivity.checkConnectivity();
+    final eitherUsers = connectivityResult == ConnectivityResult.none
+        ? await _userRepository.getCachedUsers()
+        : await _userRepository.getUsers();
+
+    eitherUsers.fold(
+      (failure) => emit(UserState.error(failure)),
+      (users) => emit(
+        UserState.loaded(
+          users: users,
+          isCached: connectivityResult == ConnectivityResult.none,
+        ),
+      ),
+    );
   }
 }

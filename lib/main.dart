@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/blocs/blocs.dart';
-import 'package:template_app/data/data.dart';
-import 'package:template_app/services/services.dart';
-import 'package:template_app/views/views.dart';
+import 'package:woki_app/blocs/blocs.dart';
+import 'package:woki_app/data/data.dart';
+import 'package:woki_app/services/services.dart';
+import 'package:woki_app/views/views.dart';
 
 Future<void> main() async {
-  await HiveService.initializeHive();
+  // await HiveService.initializeHive();
   await SystemChromeService.setSystemChrome();
 
   runApp(const Main());

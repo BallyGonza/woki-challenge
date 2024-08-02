@@ -1,4 +1,4 @@
-# template_app
+# woki_app
 
 A new Flutter project.
 

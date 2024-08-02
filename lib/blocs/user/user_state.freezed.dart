@@ -333,10 +333,10 @@ class __$$UserLoadedStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = null,
+    Object? user = freezed,
   }) {
     return _then(_$UserLoadedStateImpl(
-      null == user
+      freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as UserModel,
@@ -362,11 +362,12 @@ class _$UserLoadedStateImpl implements UserLoadedState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserLoadedStateImpl &&
-            (identical(other.user, user) || other.user == user));
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override

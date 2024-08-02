@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:template_app/blocs/blocs.dart';
-import 'package:template_app/data/data.dart';
+import 'package:woki_app/blocs/blocs.dart';
+import 'package:woki_app/data/data.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc({
@@ -12,7 +12,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   final UserRepository _userRepository;
-  late UserModel _user;
+  late User _user;
 
   Future<void> _onInit(
     UserInitialEvent event,
@@ -20,7 +20,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async {
     emit(const UserState.loading());
     try {
-      _user = await _userRepository.getUser();
+      // _user = await _userRepository.getUser();
       emit(UserState.loaded(_user));
     } catch (e) {
       emit(UserState.error(e.toString()));

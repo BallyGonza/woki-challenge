@@ -19,7 +19,7 @@ class UserList extends StatelessWidget {
                 );
               },
             )
-          : const SizedBox(),
+          : const Text('No hay usuarios'),
     );
   }
 }

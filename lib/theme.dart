@@ -20,7 +20,7 @@ ThemeData theme = ThemeData(
       fontFamily: 'StyreneB',
     ),
     iconTheme: IconThemeData(
-      color: Colors.white,
+      color: Colors.black,
     ),
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(

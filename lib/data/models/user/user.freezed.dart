@@ -22,10 +22,12 @@ User _$UserFromJson(Map<String, dynamic> json) {
 mixin _$User {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String get website => throw _privateConstructorUsedError;
   Address? get address => throw _privateConstructorUsedError;
+  Company? get company => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,12 +42,15 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
+      String username,
       String email,
       String phone,
       String website,
-      Address? address});
+      Address? address,
+      Company? company});
 
   $AddressCopyWith<$Res>? get address;
+  $CompanyCopyWith<$Res>? get company;
 }
 
 /// @nodoc
@@ -63,10 +68,12 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? username = null,
     Object? email = null,
     Object? phone = null,
     Object? website = null,
     Object? address = freezed,
+    Object? company = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -76,6 +83,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -93,6 +104,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as Address?,
+      company: freezed == company
+          ? _value.company
+          : company // ignore: cast_nullable_to_non_nullable
+              as Company?,
     ) as $Val);
   }
 
@@ -107,6 +122,18 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       return _then(_value.copyWith(address: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CompanyCopyWith<$Res>? get company {
+    if (_value.company == null) {
+      return null;
+    }
+
+    return $CompanyCopyWith<$Res>(_value.company!, (value) {
+      return _then(_value.copyWith(company: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -119,13 +146,17 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {int id,
       String name,
+      String username,
       String email,
       String phone,
       String website,
-      Address? address});
+      Address? address,
+      Company? company});
 
   @override
   $AddressCopyWith<$Res>? get address;
+  @override
+  $CompanyCopyWith<$Res>? get company;
 }
 
 /// @nodoc
@@ -140,10 +171,12 @@ class __$$UserImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? username = null,
     Object? email = null,
     Object? phone = null,
     Object? website = null,
     Object? address = freezed,
+    Object? company = freezed,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -153,6 +186,10 @@ class __$$UserImplCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: null == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
@@ -170,6 +207,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as Address?,
+      company: freezed == company
+          ? _value.company
+          : company // ignore: cast_nullable_to_non_nullable
+              as Company?,
     ));
   }
 }
@@ -180,10 +221,12 @@ class _$UserImpl implements _User {
   _$UserImpl(
       {required this.id,
       required this.name,
+      required this.username,
       required this.email,
       required this.phone,
       required this.website,
-      this.address});
+      this.address,
+      this.company});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -193,6 +236,8 @@ class _$UserImpl implements _User {
   @override
   final String name;
   @override
+  final String username;
+  @override
   final String email;
   @override
   final String phone;
@@ -200,10 +245,12 @@ class _$UserImpl implements _User {
   final String website;
   @override
   final Address? address;
+  @override
+  final Company? company;
 
   @override
   String toString() {
-    return 'User(id: $id, name: $name, email: $email, phone: $phone, website: $website, address: $address)';
+    return 'User(id: $id, name: $name, username: $username, email: $email, phone: $phone, website: $website, address: $address, company: $company)';
   }
 
   @override
@@ -213,16 +260,19 @@ class _$UserImpl implements _User {
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.username, username) ||
+                other.username == username) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.website, website) || other.website == website) &&
-            (identical(other.address, address) || other.address == address));
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.company, company) || other.company == company));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, email, phone, website, address);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, username, email, phone, website, address, company);
 
   @JsonKey(ignore: true)
   @override
@@ -242,10 +292,12 @@ abstract class _User implements User {
   factory _User(
       {required final int id,
       required final String name,
+      required final String username,
       required final String email,
       required final String phone,
       required final String website,
-      final Address? address}) = _$UserImpl;
+      final Address? address,
+      final Company? company}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -254,6 +306,8 @@ abstract class _User implements User {
   @override
   String get name;
   @override
+  String get username;
+  @override
   String get email;
   @override
   String get phone;
@@ -261,6 +315,8 @@ abstract class _User implements User {
   String get website;
   @override
   Address? get address;
+  @override
+  Company? get company;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

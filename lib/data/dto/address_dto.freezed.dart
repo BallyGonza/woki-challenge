@@ -20,10 +20,11 @@ AddressDto _$AddressDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AddressDto {
-  String get street => throw _privateConstructorUsedError;
-  String get suite => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
-  String get zipcode => throw _privateConstructorUsedError;
+  String? get street => throw _privateConstructorUsedError;
+  String? get suite => throw _privateConstructorUsedError;
+  String? get city => throw _privateConstructorUsedError;
+  String? get zipcode => throw _privateConstructorUsedError;
+  GeoDto? get geo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,14 @@ abstract class $AddressDtoCopyWith<$Res> {
           AddressDto value, $Res Function(AddressDto) then) =
       _$AddressDtoCopyWithImpl<$Res, AddressDto>;
   @useResult
-  $Res call({String street, String suite, String city, String zipcode});
+  $Res call(
+      {String? street,
+      String? suite,
+      String? city,
+      String? zipcode,
+      GeoDto? geo});
+
+  $GeoDtoCopyWith<$Res>? get geo;
 }
 
 /// @nodoc
@@ -53,29 +61,46 @@ class _$AddressDtoCopyWithImpl<$Res, $Val extends AddressDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? street = null,
-    Object? suite = null,
-    Object? city = null,
-    Object? zipcode = null,
+    Object? street = freezed,
+    Object? suite = freezed,
+    Object? city = freezed,
+    Object? zipcode = freezed,
+    Object? geo = freezed,
   }) {
     return _then(_value.copyWith(
-      street: null == street
+      street: freezed == street
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
-              as String,
-      suite: null == suite
+              as String?,
+      suite: freezed == suite
           ? _value.suite
           : suite // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
+              as String?,
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      zipcode: null == zipcode
+              as String?,
+      zipcode: freezed == zipcode
           ? _value.zipcode
           : zipcode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      geo: freezed == geo
+          ? _value.geo
+          : geo // ignore: cast_nullable_to_non_nullable
+              as GeoDto?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GeoDtoCopyWith<$Res>? get geo {
+    if (_value.geo == null) {
+      return null;
+    }
+
+    return $GeoDtoCopyWith<$Res>(_value.geo!, (value) {
+      return _then(_value.copyWith(geo: value) as $Val);
+    });
   }
 }
 
@@ -87,7 +112,15 @@ abstract class _$$AddressDtoImplCopyWith<$Res>
       __$$AddressDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String street, String suite, String city, String zipcode});
+  $Res call(
+      {String? street,
+      String? suite,
+      String? city,
+      String? zipcode,
+      GeoDto? geo});
+
+  @override
+  $GeoDtoCopyWith<$Res>? get geo;
 }
 
 /// @nodoc
@@ -101,28 +134,33 @@ class __$$AddressDtoImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? street = null,
-    Object? suite = null,
-    Object? city = null,
-    Object? zipcode = null,
+    Object? street = freezed,
+    Object? suite = freezed,
+    Object? city = freezed,
+    Object? zipcode = freezed,
+    Object? geo = freezed,
   }) {
     return _then(_$AddressDtoImpl(
-      street: null == street
+      street: freezed == street
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
-              as String,
-      suite: null == suite
+              as String?,
+      suite: freezed == suite
           ? _value.suite
           : suite // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
+              as String?,
+      city: freezed == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      zipcode: null == zipcode
+              as String?,
+      zipcode: freezed == zipcode
           ? _value.zipcode
           : zipcode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
+      geo: freezed == geo
+          ? _value.geo
+          : geo // ignore: cast_nullable_to_non_nullable
+              as GeoDto?,
     ));
   }
 }
@@ -130,27 +168,26 @@ class __$$AddressDtoImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AddressDtoImpl implements _AddressDto {
-  const _$AddressDtoImpl(
-      {required this.street,
-      required this.suite,
-      required this.city,
-      required this.zipcode});
+  _$AddressDtoImpl(
+      {this.street, this.suite, this.city, this.zipcode, this.geo});
 
   factory _$AddressDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddressDtoImplFromJson(json);
 
   @override
-  final String street;
+  final String? street;
   @override
-  final String suite;
+  final String? suite;
   @override
-  final String city;
+  final String? city;
   @override
-  final String zipcode;
+  final String? zipcode;
+  @override
+  final GeoDto? geo;
 
   @override
   String toString() {
-    return 'AddressDto(street: $street, suite: $suite, city: $city, zipcode: $zipcode)';
+    return 'AddressDto(street: $street, suite: $suite, city: $city, zipcode: $zipcode, geo: $geo)';
   }
 
   @override
@@ -161,12 +198,14 @@ class _$AddressDtoImpl implements _AddressDto {
             (identical(other.street, street) || other.street == street) &&
             (identical(other.suite, suite) || other.suite == suite) &&
             (identical(other.city, city) || other.city == city) &&
-            (identical(other.zipcode, zipcode) || other.zipcode == zipcode));
+            (identical(other.zipcode, zipcode) || other.zipcode == zipcode) &&
+            (identical(other.geo, geo) || other.geo == geo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, street, suite, city, zipcode);
+  int get hashCode =>
+      Object.hash(runtimeType, street, suite, city, zipcode, geo);
 
   @JsonKey(ignore: true)
   @override
@@ -183,23 +222,26 @@ class _$AddressDtoImpl implements _AddressDto {
 }
 
 abstract class _AddressDto implements AddressDto {
-  const factory _AddressDto(
-      {required final String street,
-      required final String suite,
-      required final String city,
-      required final String zipcode}) = _$AddressDtoImpl;
+  factory _AddressDto(
+      {final String? street,
+      final String? suite,
+      final String? city,
+      final String? zipcode,
+      final GeoDto? geo}) = _$AddressDtoImpl;
 
   factory _AddressDto.fromJson(Map<String, dynamic> json) =
       _$AddressDtoImpl.fromJson;
 
   @override
-  String get street;
+  String? get street;
   @override
-  String get suite;
+  String? get suite;
   @override
-  String get city;
+  String? get city;
   @override
-  String get zipcode;
+  String? get zipcode;
+  @override
+  GeoDto? get geo;
   @override
   @JsonKey(ignore: true)
   _$$AddressDtoImplCopyWith<_$AddressDtoImpl> get copyWith =>

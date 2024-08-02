@@ -17,9 +17,9 @@ class Address with _$Address {
       _$AddressFromJson(json);
 
   factory Address.fromDto(AddressDto dto) => Address(
-        street: dto.street,
-        suite: dto.suite,
-        city: dto.city,
-        zipcode: dto.zipcode,
+        street: dto.street ?? '',
+        suite: dto.suite ?? '',
+        city: dto.city ?? '',
+        zipcode: dto.zipcode ?? '',
       );
 }

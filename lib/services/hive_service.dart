@@ -9,7 +9,7 @@
 //     try {
 //       // Registering the UserModelAdapter to serialize/deserialize UserModel objects.
 //       Hive.registerAdapter(UserModelAdapter());
-//       WidgetsFlutterBinding.ensureInitialized();
+//     
 //       await Hive.initFlutter();
 //       // Opening a box to store UserModel objects.
 //       await Hive.openBox<UserModel>('users_box');

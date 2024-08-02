@@ -5,4 +5,6 @@ part 'user_event.freezed.dart';
 @freezed
 class UserEvent with _$UserEvent {
   const factory UserEvent.init() = UserInitialEvent;
+
+  const factory UserEvent.getUsers() = UserGetUsersEvent;
 }

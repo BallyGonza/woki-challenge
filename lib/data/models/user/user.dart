@@ -7,23 +7,23 @@ part 'user.g.dart';
 
 @freezed
 class User with _$User {
-  const factory User({
-    required String id,
+  factory User({
+    required int id,
     required String name,
     required String email,
-    required Address address,
     required String phone,
     required String website,
+    Address? address,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   factory User.fromDto(UserDto dto) => User(
         id: dto.id,
-        name: dto.name,
-        email: dto.email,
-        address: Address.fromDto(dto.address),
-        phone: dto.phone,
-        website: dto.website,
+        name: dto.name ?? '',
+        email: dto.email ?? '',
+        address: dto.address != null ? Address.fromDto(dto.address!) : null,
+        phone: dto.phone ?? '',
+        website: dto.website ?? '',
       );
 }

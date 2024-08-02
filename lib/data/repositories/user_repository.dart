@@ -1,8 +1,21 @@
 // import 'package:hive/hive.dart';
+import 'package:dartz/dartz.dart';
 import 'package:woki_app/data/data.dart';
+import 'package:woki_app/services/services.dart';
 
 class UserRepository {
   UserRepository();
+
+  Future<Either<String, List<User>>> getUsers() async {
+    final either = await ApiService().getUsers();
+
+    return either.fold(
+      (failure) => Left(failure),
+      (usersDto) => Right(
+        usersDto.map(User.fromDto).toList(),
+      ),
+    );
+  }
 
   // final Box<UserModel> box = Hive.box<UserModel>('users_box');
 

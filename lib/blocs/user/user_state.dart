@@ -7,6 +7,6 @@ part 'user_state.freezed.dart';
 class UserState with _$UserState {
   const factory UserState.initial() = UserInitialState;
   const factory UserState.loading() = UserLoadingState;
-  const factory UserState.loaded(List<User> users) = UserLoadedState;
+  const factory UserState.loaded({required List<User> users}) = UserLoadedState;
   const factory UserState.error(String message) = UserErrorState;
 }

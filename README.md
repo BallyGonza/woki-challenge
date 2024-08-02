@@ -1,16 +1,33 @@
-# woki_app
+# Desafío Woki App
 
-A new Flutter project.
+Este proyecto implementa los requerimientos específicos para el desafío de la Woki App. La aplicación consta de dos pantallas principales:
 
-## Getting Started
+1. La pantalla principal muestra los usuarios descargados desde la API.
+2. La pantalla de detalle del usuario muestra información adicional sobre un usuario seleccionado.
 
-This project is a starting point for a Flutter application.
+## Características
 
-A few resources to get you started if this is your first Flutter project:
+- Muestra usuarios obtenidos de la API
+- Presenta información detallada del usuario
+- Implementa almacenamiento local para acceso sin conexión
+- Maneja el estado de conectividad a internet
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Paquetes Utilizados
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Bloc**: Para gestión de estados
+- **Dio**: Para interacciones con la API
+- **Freezed**: Para simplificar la gestión de clases
+- **Connectivity Plus**: Para validar la conexión a internet
+- **Hive**: Para almacenamiento local de datos
+
+## Implementaciones Adicionales
+
+Además de los requerimientos obligatorios, se ha implementado almacenamiento local utilizando Hive. Esta característica permite que la aplicación muestre una advertencia y presente los últimos usuarios descargados cuando no hay conexión a internet.
+
+## Desafíos Durante el Desarrollo
+
+Durante el proceso de desarrollo, revisé y refiné mi enfoque para usar Hive al momento de almacenar datos descargados desde una API.
+
+## Comenzando
+
+Clonar el repositorio, ejecutar la app desde el main.dart en un emulador android.

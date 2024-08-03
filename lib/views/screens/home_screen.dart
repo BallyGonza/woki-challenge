@@ -26,31 +26,10 @@ class HomeScreen extends StatelessWidget {
                 users: users,
                 isCached: isCached,
               ),
-              error: (errorMessage) => _buildErrorWidget(context, errorMessage),
+              error: (errorMessage) => RetryWidget(errorMessage: errorMessage),
             );
           },
         ),
-      ),
-    );
-  }
-
-  Widget _buildErrorWidget(BuildContext context, String errorMessage) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(errorMessage),
-          const SizedBox(height: 16),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.5,
-            child: CustomElevatedButton(
-              color: Theme.of(context).colorScheme.error,
-              onPressed: () =>
-                  context.read<UserBloc>().add(const UserEvent.getUsers()),
-              text: 'Reintentar',
-            ),
-          ),
-        ],
       ),
     );
   }

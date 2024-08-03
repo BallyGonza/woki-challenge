@@ -15,7 +15,7 @@ class ApiService {
 
     return await _httpService.get(url).then(
           (either) => either.fold(
-            (failure) => Left('Error al obtener usuarios: $failure'),
+            (failure) => Left('Error while getting users: $failure'),
             _parseUsers,
           ),
         );

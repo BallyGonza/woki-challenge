@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:woki_app/data/data.dart';
+import 'package:woki_app/views/views.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({
@@ -22,36 +23,43 @@ class UserScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 16),
-            _buildUserHeader(),
+            Center(
+              child: Text(
+                user.name,
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
             const SizedBox(height: 16),
             const Divider(),
             const SizedBox(height: 16),
-            _buildInfoTile(
+            UserInfoTile(
               icon: FontAwesomeIcons.user,
               title: 'Username',
               value: user.username,
             ),
-            _buildInfoTile(
+            UserInfoTile(
               icon: FontAwesomeIcons.envelope,
               title: 'Email',
               value: user.email,
             ),
-            _buildInfoTile(
+            UserInfoTile(
               icon: FontAwesomeIcons.addressBook,
               title: 'Address',
               value:
                   '${user.address?.street}, ${user.address?.suite}, ${user.address?.city}, ${user.address?.zipcode}',
             ),
-            _buildInfoTile(
+            UserInfoTile(
               icon: FontAwesomeIcons.phone,
               title: 'Phone',
               value: user.phone,
             ),
-            _buildInfoTile(
+            UserInfoTile(
               icon: FontAwesomeIcons.globe,
               title: 'Website',
               value: user.website,
             ),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.only(bottom: 16),
               child: Row(
@@ -90,47 +98,6 @@ class UserScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildUserHeader() {
-    return Center(
-      child: Text(
-        user.name,
-        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
-  Widget _buildInfoTile({
-    required IconData icon,
-    required String title,
-    required String value,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: Row(
-        children: [
-          Icon(icon, size: 20),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(value, style: const TextStyle(fontSize: 16)),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -8,7 +8,9 @@ import 'package:woki_app/data/data.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc({
     required UserRepository userRepository,
+    Connectivity? connectivity,
   })  : _userRepository = userRepository,
+        _connectivity = connectivity ?? Connectivity(),
         super(const UserState.initial()) {
     on<UserInitialEvent>(_onInit);
     on<UserGetUsersEvent>(_onGetUsers);
@@ -16,9 +18,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   final UserRepository _userRepository;
-  final Connectivity _connectivity = Connectivity();
+  final Connectivity _connectivity;
 
-  Future<void> _onInit(UserInitialEvent event, Emitter<UserState> emit) async {
+  Future<void> _onInit(
+    UserInitialEvent event,
+    Emitter<UserState> emit,
+  ) async {
     await _getUsers(emit);
   }
 

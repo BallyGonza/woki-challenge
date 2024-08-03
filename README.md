@@ -19,6 +19,7 @@ Este proyecto implementa los requerimientos específicos para el desafío de la 
 - **Freezed**: Para simplificar la gestión de clases
 - **Connectivity Plus**: Para validar la conexión a internet
 - **Hive**: Para almacenamiento local de datos
+- **Provider**: Para realizar la injeccion de dependencias
 
 ## Implementaciones Adicionales
 
@@ -27,7 +28,8 @@ Además de los requerimientos obligatorios, se ha implementado almacenamiento lo
 ## Desafíos Durante el Desarrollo
 
 Durante el proceso de desarrollo, revisé y refiné mi enfoque para usar Hive al momento de almacenar datos descargados desde una API.
+Me quedo pendiente la implementacion de test del bloc y el repositorio, desarrolle los test pero me encontre un error que me quedo pendiente resolver.
 
 ## Comenzando
 
-Clonar el repositorio, ejecutar la app desde el main.dart en un emulador android.
+Clonar el repositorio, ejecutar la app desde el main.dart en un emulador android/iOS.
